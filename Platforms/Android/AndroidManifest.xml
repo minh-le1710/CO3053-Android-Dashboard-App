@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Quyền -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<!-- Ứng dụng -->
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Dashboard IOT">
+		<!-- API key cho Google Maps: PHẢI nằm trong application -->
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCKXRX20qXtdDnw3migKxy2_RaZ6-Ws3sg" />
+	</application>
+</manifest>

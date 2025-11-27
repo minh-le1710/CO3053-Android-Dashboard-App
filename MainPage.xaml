@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             x:Class="MauiApp2.MainPage"
+             shell:Shell.NavBarIsVisible="False">
+
+    <!-- Nền kiểu Blynk -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#020617" Offset="0.0" />
+            <GradientStop Color="#02091f" Offset="0.3" />
+            <GradientStop Color="#020617" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Resources>
+        <!-- Label mặc định trắng -->
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+
+        <!-- Card chung -->
+        <Style TargetType="Frame" x:Key="WidgetCard">
+            <Setter Property="BackgroundColor" Value="#0f172a" />
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="HasShadow" Value="True" />
+        </Style>
+
+        <!-- Tiêu đề nhỏ -->
+        <Style TargetType="Label" x:Key="WidgetTitle">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Opacity" Value="0.75" />
+        </Style>
+
+        <!-- Giá trị chính -->
+        <Style TargetType="Label" x:Key="WidgetValue">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <!-- Lưới chính: Header / Map / Summary / Tiles / Button -->
+        <Grid Padding="20"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+              RowSpacing="18">
+
+            <!-- 0: Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="2">
+                <!-- Dòng này sẽ được cập nhật từ OpenWeatherMap -->
+                <Label x:Name="CityWeatherLabel"
+           Text="Hồ Chí Minh City • -- °C - Loading" 
+           FontAttributes="Italic"
+           FontSize="16"
+           Opacity="0.9" />
+
+                <Label Text="Dashboard"
+           FontSize="24"
+           FontAttributes="Bold" />
+
+                <Label x:Name="StatusLabel"
+           Text="Đang tải dữ liệu..."
+           FontSize="13"
+           Opacity="0.6" />
+            </VerticalStackLayout>
+
+
+            <!-- 1: Map vị trí hiện tại -->
+            <Frame Grid.Row="1"
+                   Style="{StaticResource WidgetCard}">
+                <maps:Map x:Name="LocationMap"
+                          HeightRequest="220"
+                          IsShowingUser="True"
+                          MapType="Street" />
+            </Frame>
+
+            <!-- 2: Hàng nút điều khiển -->
+            <Grid Grid.Row="2"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="12">
+
+                <Button x:Name="Button1"
+            Text="Button 1 OFF"
+            FontAttributes="Bold"
+            CornerRadius="18"
+            HeightRequest="52"
+            BackgroundColor="#1e293b"
+            TextColor="White"
+            Clicked="Button1_Clicked" />
+
+                <Button x:Name="Button2"
+            Grid.Column="1"
+            Text="Button 2 OFF"
+            FontAttributes="Bold"
+            CornerRadius="18"
+            HeightRequest="52"
+            BackgroundColor="#1e293b"
+            TextColor="White"
+            Clicked="Button2_Clicked" />
+
+            </Grid>
+
+            <!-- 3: Các tile chi tiết -->
+            <Grid Grid.Row="3"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="12"
+                  RowSpacing="12">
+
+                <!-- Tile Nhiệt độ -->
+                <Frame Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource WidgetCard}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Nhiệt độ"
+                               Style="{StaticResource WidgetTitle}" />
+                        <Label x:Name="TempValue"
+                               Text="-- °C"
+                               Style="{StaticResource WidgetValue}" />
+                        <ProgressBar x:Name="TempBar"
+                                     Progress="0"
+                                     HeightRequest="4"
+                                     BackgroundColor="#1f2937"
+                                     ProgressColor="#22c55e" />
+                        <Label x:Name="TempRangeLabel"
+                           Text="Min: --  |  Max: --"
+                           FontSize="11"
+                           Opacity="0.6" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Tile Độ ẩm -->
+                <Frame Grid.Row="0" Grid.Column="1"
+                       Style="{StaticResource WidgetCard}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Độ ẩm"
+                               Style="{StaticResource WidgetTitle}" />
+                        <Label x:Name="HumValue"
+                               Text="-- %"
+                               Style="{StaticResource WidgetValue}" />
+                        <ProgressBar x:Name="HumBar"
+                                     Progress="0"
+                                     HeightRequest="4"
+                                     BackgroundColor="#1f2937"
+                                     ProgressColor="#38bdf8" />
+                        <Label x:Name="HumRangeLabel"
+                           Text="Min: --  |  Max: --"
+                           FontSize="11"
+                           Opacity="0.6" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Tile Lux -->
+                <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       Style="{StaticResource WidgetCard}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Độ sáng (Lux)"
+                               Style="{StaticResource WidgetTitle}" />
+                        <Label x:Name="LuxLabel"
+                               Text="-- lx"
+                               Style="{StaticResource WidgetValue}" />
+                        <Slider x:Name="LuxSlider"
+                                Minimum="0"
+                                Maximum="6000"
+                                Value="0"
+                                MinimumTrackColor="#f97316"
+                                MaximumTrackColor="#1f2937" />
+                        <Label Text="0 – 6000 lx"
+                               FontSize="11"
+                               Opacity="0.6" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- 4: Nút refresh -->
+            <Button Grid.Row="4"
+                    x:Name="RefreshButton"
+                    Text="↻ Cập nhật ngay"
+                    HeightRequest="46"
+                    CornerRadius="22"
+                    BackgroundColor="#22c55e"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Clicked="RefreshButton_Clicked" />
+        </Grid>
+    </ScrollView>
+</ContentPage>
