@@ -9,11 +9,11 @@ https://minh-le1710.github.io/CO3053-Android-Dashboard-App/
 
 | Trang chủ | Wifi |
 | --- | --- |
-| ![Trang chủ demo](trang%20ch%E1%BB%A7_demo.jpg) | ![Wifi demo](wifi_demo.jpg) |
+| ![Trang chủ demo](docs/trang%20ch%E1%BB%A7_demo.jpg) | ![Wifi demo](docs/wifi_demo.jpg) |
 
 | Thông tin | Profile |
 | --- | --- |
-| ![Info demo](info_demo.jpg) | ![Profile demo](profile_demo.jpg) |
+| ![Info demo](docs/info_demo.jpg) | ![Profile demo](docs/profile_demo.jpg) |
 
 ## App làm được gì?
 
@@ -48,7 +48,8 @@ https://minh-le1710.github.io/CO3053-Android-Dashboard-App/
 |   |-- AdafruitFeed.cs    # Model dữ liệu sensor
 |   `-- WeatherModels.cs   # Model response thời tiết
 |-- Resources/             # Ảnh, font, app icon, splash
-`-- index.html             # Trang demo cho GitHub Pages
+`-- docs/
+    `-- index.html         # Trang demo cho GitHub Pages
 ```
 
 ## Cách chạy project
